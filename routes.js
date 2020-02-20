@@ -8,6 +8,8 @@ module.exports = function(app) {
     //************//
     //    Users   //
     //************//
+    
+    // Get user
     app.get('/api/users/:username', async (req, res) => {
         const userData = await getSingleUser(req.params.username);
         const likes = await getLikes(userData.id);
@@ -20,6 +22,7 @@ module.exports = function(app) {
         res.send(data);
     });
 
+    // Add like to user
     app.post('/api/:userId', (req, res) => {
         addLike(req.params.userId);
         res.sendStatus(200);

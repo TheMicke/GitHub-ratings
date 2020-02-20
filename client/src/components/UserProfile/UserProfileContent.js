@@ -16,6 +16,10 @@ const VisitGithubLink = styled.p`
     margin-top: -15px;
 `;
 
+const HeartCount = styled.span`
+    color: #B00;
+`;
+
 function UserProfileContent(props) {
     console.log('props from userProfile', props);
     const addLike = (event) => {
@@ -25,6 +29,7 @@ function UserProfileContent(props) {
             headers: {'Content-Type':'application/json'},
             body: {}
         });
+        document.getElementById('heart-count').innerHTML = Number(document.getElementById('heart-count').innerHTML)+1;
     };
 
     return (
@@ -43,7 +48,7 @@ function UserProfileContent(props) {
                 <p><span className="user-profile__heading">Public repos: </span>{props.data.user.public_repos}</p>
                 <p><span className="user-profile__heading">Followers: </span>{props.data.user.followers}</p>
                 <p><span className="user-profile__heading">Following: </span>{props.data.user.following}</p>
-                <p><a href="#like" onClick={addLike}><HeartIcon src={heart_red} /></a> { props.data.likes }</p>
+                <p><a href="#like" onClick={addLike}><HeartIcon src={heart_red} /></a> <HeartCount id="heart-count">{ props.data.likes }</HeartCount></p>
             </div>
         </div>
     )
