@@ -34,6 +34,8 @@ const createFile = inputData => {
 /******************************
  **       Get user data       **
  ******************************/
+
+// Fetch single user from GitHub
 const getSingleUser = async username => {
     let data;
     data = await fetch(baseApiUrl + 'users/' + username).then(res => (data = res.json()));
@@ -41,19 +43,7 @@ const getSingleUser = async username => {
     return data;
 };
 
-const getLikes = userId => {
-    return new Promise(function(resolve, reject) {
-        fs.readFile('likes/' + userId + '.json', function read(err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                const jsonData = JSON.parse(data);
-                resolve(jsonData.likes);
-            }
-        });
-    });
-};
-
+// Local JSON file reader
 const readFile = userId => {
     return new Promise(function(resolve, reject) {
         fs.readFile('likes/' + userId + '.json', function read(err, data) {
@@ -67,11 +57,28 @@ const readFile = userId => {
     });
 };
 
+// Get likes from local JSON-file
+const getLikes = userId => {
+    return new Promise(function(resolve, reject) {
+        fs.readFile('likes/' + userId + '.json', function read(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                const jsonData = JSON.parse(data);
+                resolve(jsonData.likes);
+            }
+        });
+    });
+};
+
+
+
+
 const addLike = async userId => {
     const fileContent = await readFile(userId);
     fileContent.likes += 1;
     console.log('Added like to ' + fileContent.username);
-    
+
     let data = JSON.stringify(fileContent, null, 4);
 
     if (fs.existsSync('likes/' + userId + '.json')) {
@@ -84,7 +91,6 @@ const addLike = async userId => {
     }
 
     return true;
-
 };
 
 module.exports = { getSingleUser, getLikes, addLike };
