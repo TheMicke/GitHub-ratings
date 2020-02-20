@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import DefaultButton from '../common/DefaultButton';
 
 const NavbarContainer = styled.div`
     background-color: #37393a;
@@ -19,7 +18,6 @@ const Searchbar = styled.input`
 function Navbar() {
     return (
         <NavbarContainer>
-            {/* <DefaultButton href="/" text="Home" /> */}
             <Searchbar type="text" placeholder="Type GitHub username and press enter"/>
         </NavbarContainer>
     );

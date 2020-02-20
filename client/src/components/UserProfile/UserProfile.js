@@ -6,7 +6,7 @@ import UserProfileContent from './UserProfileContent';
 function UserProfile(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState();
-
+    
     useEffect(() => {
         (async function fetchData() {
             setIsLoading(true)
@@ -15,11 +15,11 @@ function UserProfile(props) {
             .then(data => setUserData(data));
             setIsLoading(false);
         })();
-    }, []);
+    }, [props.match.params.username]);
 
     return (
         <div>
-            {isLoading ? <LoaderSpinner /> : <UserProfileContent user={userData}/>}
+            {isLoading ? <LoaderSpinner /> : <UserProfileContent data={userData}/>}
         </div>
     )
 }

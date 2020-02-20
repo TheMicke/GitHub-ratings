@@ -1,6 +1,6 @@
 .user-profile__content-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
     max-width: 1024px;
@@ -12,16 +12,7 @@
 .user-profile__content-box {
     display: inline-block;
     text-align: left;
-    width: 45%;
-    padding: 2.5%;
-}
-
-.user-profile__left-box {
-
-}
-
-.user-profile__right-box {
-
+    width: 100%;
 }
 
 .user-profile__profile-image {
@@ -33,4 +24,17 @@
 
 .user-profile__heading {
     font-weight: 700;
+}
+
+@media screen and (min-width: 600px) {
+    .user-profile__content-container {
+        flex-direction: row;
+    }
+
+    .user-profile__content-box {
+        display: block;
+        text-align: left;
+        width: 45%;
+        padding: 2.5%;
+    }
 }

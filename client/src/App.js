@@ -23,7 +23,7 @@ function App() {
                 <PageContainer>
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/users/:username" component={UserProfile} />
+                        <Route exact path="/:username" component={UserProfile} />
                     </Switch>
                 </PageContainer>
             </AppContainer>
