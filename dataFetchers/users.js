@@ -41,7 +41,7 @@ const getLikes = userId => {
         }
         let content = JSON.parse(data);
 
-        console.log(content.likes);
+        return content.likes;
     });
 };
 
