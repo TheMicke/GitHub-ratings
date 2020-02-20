@@ -16,9 +16,18 @@ const Searchbar = styled.input`
 `;
 
 function Navbar() {
+    const changeUser = (e) => {
+        e.preventDefault();
+        const searchbar = document.getElementById('searchbar');
+        window.location.pathname = `/${searchbar.value}`;
+
+    }
+
     return (
         <NavbarContainer>
-            <Searchbar type="text" placeholder="Type GitHub username and press enter"/>
+            <form onSubmit={changeUser}>
+                <Searchbar id="searchbar" type="text" placeholder="Type GitHub username and press enter"/>
+            </form>
         </NavbarContainer>
     );
 }

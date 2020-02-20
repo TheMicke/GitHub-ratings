@@ -2,9 +2,16 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const baseApiUrl = 'https://api.github.com/';
 
-/******************************
+/*******************************
  **       Node FS stuff       **
  ******************************/
+
+// Check if likes folder exist, if not create it.
+if (!fs.existsSync('likes/')) {
+    fs.mkdirSync('likes/');
+}
+
+// Create JSON file for each visited user
 const createFile = inputData => {
     const rawData = {
         userId: inputData.id,
@@ -34,17 +41,23 @@ const getSingleUser = async username => {
     return data;
 };
 
-const getLikes = userId => {
-    fs.readFile('likes/' + userId +'.json', function read(err, data) {
-        if (err) {
-            throw err;
-        }
-        let content = JSON.parse(data);
 
-        return content.likes;
+const getLikes = userId => {
+    return new Promise(function(resolve, reject) {
+        fs.readFile('likes/' + userId + '.json', function read(err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                const jsonData = JSON.parse(data);
+                resolve(jsonData.likes);
+            }
+        });
     });
 };
 
-const addLike = () => {};
+const addLike = (userId) => {
+    console.log(userId + ' got a like');
+};
+
 
 module.exports = { getSingleUser, getLikes, addLike };

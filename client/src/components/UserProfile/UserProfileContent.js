@@ -11,20 +11,20 @@ const HeartIcon = styled.img`
     margin-right: 5px;
 `;
 
+const VisitGithubLink = styled.p`
+    line-height: .75;
+    margin-top: -15px;
+`;
 
 function UserProfileContent(props) {
-    console.log(props);
+    console.log('props from userProfile', props);
     const addLike = (event) => {
         event.preventDefault();
-        fetch('/api/users/' + props.data.user.login, {
+        fetch('/api/' + props.data.user.id, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
-            body: {
-                "userId": props.data.user.id,
-                "username": props.data.user.login
-            }
+            body: {}
         });
-        console.log('liked');
     };
 
     return (
@@ -34,7 +34,10 @@ function UserProfileContent(props) {
             </div>
 
             <div className="user-profile__content-box">
-                <h2><a href={props.data.user.html_url}>{props.data.user.login}</a></h2>
+                <a href={props.data.user.html_url} target="_blank" rel="noopener noreferrer" >
+                    <h2>{props.data.user.login}</h2>
+                    <VisitGithubLink>Visit GitHub</VisitGithubLink>
+                </a>
                 <p><span className="user-profile__heading">Profile created: </span>{props.data.user.created_at.split('T')[0]}</p>
                 <p><span className="user-profile__heading">Last updated: </span>{props.data.user?.updated_at.split('T')[0]}</p>
                 <p><span className="user-profile__heading">Public repos: </span>{props.data.user.public_repos}</p>

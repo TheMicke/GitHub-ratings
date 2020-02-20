@@ -10,18 +10,18 @@ module.exports = function(app) {
     //************//
     app.get('/api/users/:username', async (req, res) => {
         const userData = await getSingleUser(req.params.username);
-
-
+        const likes = await getLikes(userData.id);
+        
         const data = {
             user: userData,
-            likes: getLikes(userData.id),
+            likes: likes,
         };
-        
+
         res.send(data);
     });
 
-    app.post('/api/users/:username', (req, res) => {
-        console.log('likey likey', req.params);
-        addLike(req.params.username);
+    app.post('/api/:userId', (req, res) => {
+        addLike(req.params.userId);
+        res.sendStatus(200);
     });
 };
