@@ -71,9 +71,6 @@ const getLikes = userId => {
     });
 };
 
-
-
-
 const addLike = async userId => {
     const fileContent = await readFile(userId);
     fileContent.likes += 1;
