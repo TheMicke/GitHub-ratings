@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import './user-profile.css';
 // import heart_black from '../../images/heart_black.svg';
 import heart_red from '../../images/heart_red.svg';
+import UserNotFound from './UserNotFound';
 
 const HeartIcon = styled.img`
     height: auto;
@@ -33,6 +34,8 @@ function UserProfileContent(props) {
     };
 
     return (
+        <>
+        {!props.data.user.id ? <UserNotFound /> :
         <div className="user-profile__content-container">
             <div className="user-profile__content-box">
                 <img className="user-profile__profile-image" src={props.data.user.avatar_url} alt="avatar" />
@@ -51,6 +54,8 @@ function UserProfileContent(props) {
                 <p><a href="#like" onClick={addLike}><HeartIcon src={heart_red} /></a> <HeartCount id="heart-count">{ props.data.likes }</HeartCount></p>
             </div>
         </div>
+        }
+        </>
     )
 }
 
